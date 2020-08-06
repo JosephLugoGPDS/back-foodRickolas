@@ -22,15 +22,14 @@ const clientesSchema = new Schema ( {
     },
     telefono:{
         type: String,
-        required: true 
+        required: true
     },
     rol:{
         type: String,
         default: 'CLIENTE ROL'
     },
     dni:{
-        type: String,
-        required: true
+        type: String
     },
     fecha_nacimiento:{
         type: String,

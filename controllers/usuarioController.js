@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 exports.signupUsuario = async(req, res) =>{
     //leer los datos del formulario
     const usuario = new Usuarios(req.body);
-    usuario.password = await bcrypt.hash(req.body.password,12);
+    usuario.password = await bcrypt.hash(req.body.password,10);
     try {
         await usuario.save();
         res.json({message: 'usuario creado correctamente'})

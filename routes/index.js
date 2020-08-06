@@ -12,21 +12,27 @@ const usuarioController = require('../controllers/usuarioController');
 //middleware para proteger rutas
 const auth = require('../middleware/auth');
 
-
 module.exports = function () {
 
     /****CLIENTES***/
+    //#####Cliente auth###########
+
+    //signupCliente
+    router.post('/signupcliente', clienteController.signupCliente);
+
+    //signinCliente
+    router.post('/signincliente', clienteController.signinCliente);
 
     //Agregar nuevos clientes
     router.post('/clientes', clienteController.nuevoCliente);
 
     //Obtener clientes
     router.get('/clientes', 
-    auth,
+    // auth,
     clienteController.mostrarClientes);
 
     //Obtener clientes
-    router.get('/clientes/:idCliente', clienteController.mostrarCliente);
+    router.get('/clientes/:idCliente',clienteController.mostrarCliente);
 
     //Actualizar cliente
     router.put('/clientes/:idCliente', clienteController.actualizarCliente);
@@ -43,7 +49,7 @@ module.exports = function () {
 
     //Monstrar todos los productos
     router.get('/productos',
-    auth,
+    // auth,
     productoController.mostrarProductos);
 
     //Mostrar productos con estado:true --falta
@@ -59,22 +65,28 @@ module.exports = function () {
 
     //Actualizar producto por id
     router.put('/productos/:idProducto',
-        auth,
+        // auth,
         productoController.subirArchivo,
         productoController.actualizarProducto);
 
     //Eliminar producto (cambiar estado de true a false)
     router.delete('/productos/:idProducto',
-    auth, 
+    // auth, 
     productoController.eliminarProducto);
+
+    //Realizar busqueda de productos
+    router.post('/productos/busqueda/:query', productoController.buscarProducto);
+
 
     /****Pedidos *****/
 
     //Agregar un pedido, falta agregar funcionalidad
-    router.post('/pedidos',pedidoController.nuevoPedido);
+    router.post('/pedidos/nuevo/:id',pedidoController.nuevoPedido);
 
     //Mostrar pedidos
-    router.get('/pedidos', pedidoController.mostrarPedidos);
+    router.get('/pedidos', 
+    // auth,
+    pedidoController.mostrarPedidos);
 
     //Mostrar pedido por id
     router.get('/pedidos/:idPedido',pedidoController.mostrarPedido);
